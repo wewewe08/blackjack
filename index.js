@@ -36,6 +36,7 @@ function RenderGame() {
 function DrawNewCard() {
     let newCard = 5;
     sum += newCard;
+    cards.push(newCard);
     RenderGame();
 }
 
