@@ -1,3 +1,8 @@
+let player = {
+    name: "Yvonne",
+    chips: 145
+}
+
 let cards = []
 let sum = 0
 
@@ -11,6 +16,9 @@ let cardsButtonEl = document.getElementById("draw-btn")
 let messageEl = document.getElementById("message-el")
 let sumEl = document.getElementById("sum-el");
 let cardsEl = document.getElementById("cards-el");
+
+let playerEl = document.getElementById("player-el");
+playerEl.textContent = player.name + ": $" + player.chips; 
 
 function GetRandomCard(){
     let randomNum = Math.floor(Math.random() * 13) + 1 // 1 - 13
