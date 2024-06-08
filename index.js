@@ -1,10 +1,8 @@
-let firstCard = 10
-let secondCard = 4
-let cards = [firstCard, secondCard]
-let sum = firstCard + secondCard
+let cards = []
+let sum = 0
 
 let hasBlackJack = false
-let isAlive = true
+let isAlive = false
 let message = ""
 
 let startButtonEl = document.getElementById("start-btn");
@@ -14,13 +12,32 @@ let messageEl = document.getElementById("message-el")
 let sumEl = document.getElementById("sum-el");
 let cardsEl = document.getElementById("cards-el");
 
+function GetRandomCard(){
+    let randomNum = Math.floor(Math.random() * 13) + 1 // 1 - 13
+    if (randomNum > 10) {
+        return 10
+    } else if (randomNum === 1) {
+        return 11
+    } else {
+        return randomNum
+    }
+}
+
 function StartGame() {
+    let firstCard = GetRandomCard()
+    let secondCard = GetRandomCard()
+    cards.push(firstCard);
+    cards.push(secondCard);
+    sum = firstCard + secondCard;
     RenderGame();
 }
 
 function RenderGame() {
-    cardsEl.textContent += " " + cards[0] + " " + cards[1];
-    sumEl.textContent += " " + sum;
+    cardsEl.textContent = "Cards: "
+    for (let i = 0; i < cards.length; i++) {
+        cardsEl.textContent += cards[i] + " "
+    }
+    sumEl.textContent = "Sum: " + sum;
     if (sum <= 20) {
         message = "Do you want to draw a new card?"
     } else if (sum === 21) {
@@ -34,10 +51,12 @@ function RenderGame() {
 }
 
 function DrawNewCard() {
-    let newCard = 5;
-    sum += newCard;
-    cards.push(newCard);
-    RenderGame();
+    if (isAlive === true && hasBlackJack === false){
+        let card = GetRandomCard()
+        sum += card
+        cards.push(card)
+        RenderGame()
+    }
 }
 
 startButtonEl.addEventListener("click", StartGame);
