@@ -8,6 +8,7 @@ let sum = 0
 
 let hasBlackJack = false
 let isAlive = false
+let gameOver = false;
 let message = ""
 
 let startButtonEl = document.getElementById("start-btn");
@@ -32,12 +33,15 @@ function GetRandomCard(){
 }
 
 function StartGame() {
-    let firstCard = GetRandomCard()
-    let secondCard = GetRandomCard()
-    cards.push(firstCard);
-    cards.push(secondCard);
-    sum = firstCard + secondCard;
-    RenderGame();
+    if (gameOver === false && isAlive === false){
+        isAlive = true;
+        let firstCard = GetRandomCard()
+        let secondCard = GetRandomCard()
+        cards.push(firstCard);
+        cards.push(secondCard);
+        sum = firstCard + secondCard;
+        RenderGame();
+    }
 }
 
 function RenderGame() {
@@ -51,9 +55,11 @@ function RenderGame() {
     } else if (sum === 21) {
         message = "You've got Blackjack!"
         hasBlackJack = true
+        gameOver = true;
     } else {
         message = "You're out of the game!"
         isAlive = false
+        gameOver = true;
     }
     messageEl.textContent = message;
 }
